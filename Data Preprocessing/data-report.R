@@ -10,7 +10,7 @@ data_report_cont <- function(dataset) {
   card <- sapply(dataset, function(x) length(unique(x[!is.na(x)])))
   summary_df <- t(sapply(dataset, function(x) summary(x[!is.na(x)])))
   std <- sapply(dataset, function(x) sd(x[!is.na(x)]))
-  df <- data_frame("Feature" = feature, "Count" = count, 
+  df <- tibble("Feature" = feature, "Count" = count, 
                    "Missing %" = missing, 
                    "Card." = card, "Min" = summary_df[,1], 
                    "1st Qrt." = summary_df[,2],
@@ -37,7 +37,7 @@ data_report_disc <- function(dataset) {
   second_mode_freq <- sapply(dataset, function(x) sort(table(x), 
                                                        decreasing = T)[2])
   second_mode_percent <- second_mode_freq/count
-  df <- data_frame("Feature" = feature, "Count" = count, 
+  df <- tibble("Feature" = feature, "Count" = count, 
                    "Missing" = missing, "Card." = card,
                    "Mode" = mode, "Mode Freq." = mode_freq, 
                    "Mode %" = mode_percent,
