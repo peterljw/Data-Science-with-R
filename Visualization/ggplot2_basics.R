@@ -20,7 +20,7 @@ a + geom_bar() # common
 # continuous vs. continuous
 f <- ggplot(mpg, aes(cty, hwy))
 f + geom_jitter() # common
-f + geom_point() # common
+f + geom_point() # common # inlucde aes(size=hwy) to adjust point sizes based on var
 f + geom_smooth(model = lm) # common
 f + geom_text(aes(label = cty))
 
@@ -48,6 +48,7 @@ j + geom_step(direction = "hv")
 x <- rnorm(10000)
 y <- runif(10000, min = -1, max = 1)
 df <- data_frame(x, y)
+
 i <- ggplot(df, aes(x, y))
 i + geom_bin2d()
 i + geom_density2d()
@@ -60,3 +61,12 @@ map <- map_data("state")
 l <- ggplot(df, aes(fill = murder))
 l + geom_map(aes(map_id = state), map = map) +
   expand_limits(x = map$long, y = map$lat)
+
+# ------------ Facets ------------
+g + facet_wrap(~DISCETE COLUMN)
+
+# more examples
+ggplot(gapminder, aes(x=gdpPercap, y=lifeExp, color=continent, size =pop)) + 
+  geom_point() + 
+  facet_wrap(~year) + 
+  scale_x_log10()
